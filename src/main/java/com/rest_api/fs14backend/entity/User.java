@@ -26,4 +26,8 @@ public class User {
     @Column
     private UUID password;
 
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
 }
