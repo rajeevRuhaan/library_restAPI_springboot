@@ -1,0 +1,31 @@
+package com.rest_api.fs14backend.entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.Date;
+import java.util.UUID;
+
+@Entity
+@Data
+public class Book {
+    @Id
+    @GeneratedValue
+    @UuidGenerator
+    private UUID id;
+    @Column(nullable = false,columnDefinition = "varchar(50)")
+    private String title;
+    @Column(nullable = false,columnDefinition = "varchar(50)")
+    private String isbn;
+    @Column(nullable = false)
+    private Date publishedDate;
+    @Column(nullable = false)
+    private String publisher;
+    @Column(nullable = false)
+    private String cover;
+
+}
