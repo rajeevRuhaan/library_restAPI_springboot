@@ -2,6 +2,7 @@ package com.rest_api.fs14backend.controller;
 
 import com.rest_api.fs14backend.entity.User;
 import com.rest_api.fs14backend.repository.UserRepository;
+import com.rest_api.fs14backend.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,23 +15,21 @@ import java.util.List;
 @RequestMapping("api/v1/user")
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private UserServiceImpl userService;
 
     @GetMapping("/")
     public List<User> findAll(){
-        return userRepository.findAll();
+        return userService.findAll();
     }
 
     @PostMapping("/signup")
     public List<User> signup(){
-        User user = new User("mughees", "admin");
-        userRepository.save(user);
-        return (List<User>) user;
+        return userService.signup();
     }
 
     @PostMapping("/signin")
     public String signin(){
-        return "user signed in";
+        return userService.signin();
     }
 
 }
