@@ -18,22 +18,12 @@ import com.rest_api.fs14backend.service.BookService;
 public class BookCopyController {
     @Autowired
     BookCopyService bookCopyService;
-
     @Autowired
     BookService bookService;
-
-
     @GetMapping()
     public List<BookCopy> findAll(){
         return bookCopyService.getAll();
     }
-    /**@PostMapping()
-    public BookCopy createOne(@RequestBody BookCopyDto bookCopyDto){
-        UUID bookId = bookCopyDto.getBookId();
-        Book book = bookService.findOne(bookId);
-        BookCopy bookCopy = bookCopyMapper.toBookCopy(book);
-        return bookCopyService.createOne(bookCopy);
-    }*/
     @PostMapping()
     public BookCopy createOne(@RequestBody BookCopyDto bookCopyDto){
         return bookCopyService.createOne(bookCopyDto);
