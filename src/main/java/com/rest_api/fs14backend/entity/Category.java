@@ -17,8 +17,10 @@ public class Category {
     @UuidGenerator
     private UUID id;
 
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String name;
 
-
+    public Category(String name) {
+        this.name = name;
+    }
 }

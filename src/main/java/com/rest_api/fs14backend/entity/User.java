@@ -8,7 +8,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Entity(name = "user")
-@Table(name = "user")
+@Table(name = "customer")
 @Data
 @NoArgsConstructor
 public class User {
@@ -16,18 +16,20 @@ public class User {
     @GeneratedValue
     @UuidGenerator
     private UUID id;
+    @Column(nullable = false,columnDefinition = "varchar(50)")
+    private String firstname;
+
+    @Column(nullable = false,columnDefinition = "varchar(50)")
+    private String lastname;
 
     @Column(unique = true,nullable = false,columnDefinition = "varchar(50)")
     private String username;
 
-    @Column(nullable = false,columnDefinition = "varchar(50)")
-    private String email;
-
     @Column
-    private UUID password;
+    private String password;
 
-    public User(String username, String email) {
+    public User(String username, String password) {
         this.username = username;
-        this.email = email;
+        this.password = password;
     }
 }
