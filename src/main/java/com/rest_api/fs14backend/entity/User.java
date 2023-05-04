@@ -7,8 +7,8 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
-@Entity(name = "user")
-@Table(name = "customer")
+@Entity
+@Table(name = "user")
 @Data
 @NoArgsConstructor
 public class User {
