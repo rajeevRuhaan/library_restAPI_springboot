@@ -1,9 +1,6 @@
 package com.rest_api.fs14backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class Book {
     @Id
@@ -24,14 +21,24 @@ public class Book {
     private String title;
     @Column(nullable = false,columnDefinition = "varchar(50)")
     private String isbn;
-    @Column(nullable = false)
-    private String author;
-    @Column(nullable = false)
-    private String category;
+    @OneToOne
+    private Author author;
+    @OneToOne
+    private Category category;
     @Column(nullable = false)
     private Date publishedDate;
     @Column(nullable = false)
     private String publisher;
     @Column(nullable = false)
     private String cover;
+
+    public Book(String title, String isbn, Author author, Category category, Date publishedDate, String publisher, String cover) {
+        this.title = title;
+        this.isbn = isbn;
+        this.author = author;
+        this.category = category;
+        this.publishedDate = publishedDate;
+        this.publisher = publisher;
+        this.cover = cover;
+    }
 }
