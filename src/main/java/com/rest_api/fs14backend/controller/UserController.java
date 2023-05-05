@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("api/v1/users")
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
@@ -22,14 +22,14 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping("/signup")
-    public List<User> signup(){
-        return userService.signup();
-    }
-
-    @PostMapping("/signin")
-    public String signin(){
-        return userService.signin();
-    }
+//    @PostMapping("/signup")
+//    public List<User> signup(){
+//        return userService.signup();
+//    }
+//
+//    @PostMapping("/signin")
+//    public String signin(){
+//        return userService.signin();
+//    }
 
 }
