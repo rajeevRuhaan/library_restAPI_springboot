@@ -15,10 +15,8 @@ public class Author {
     @GeneratedValue
     @UuidGenerator
     private UUID id;
-    @Column(nullable = true, columnDefinition = "varchar(50)")
-    private String firstName;
-    @Column(nullable = true, columnDefinition = "varchar(50)")
-    private String lastName;
+    @Column(nullable = false, columnDefinition = "varchar(50)")
+    private String authorName;
     @Column(nullable = false, columnDefinition = "varchar(50)")
     private String email;
     @Column(nullable = true, columnDefinition = "varchar(50)")
