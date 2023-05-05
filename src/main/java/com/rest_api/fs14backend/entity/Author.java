@@ -1,20 +1,15 @@
 package com.rest_api.fs14backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
 @Entity
 @Table(name="author")
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Author {
     @Id
     @GeneratedValue
