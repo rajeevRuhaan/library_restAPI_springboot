@@ -22,7 +22,7 @@ public class AuthorController {
             UUID id = authorService.createAuthor(author);
             res = new ResponseEntity<String>("new Author created: " + author.getFirstName() +" " + author.getLastName(), HttpStatus.CREATED);
         } catch (Exception e) {
-            res = new ResponseEntity<String>( "Unable to save", HttpStatus.INTERNAL_SERVER_ERROR)
+            res = new ResponseEntity<String>( "Unable to save", HttpStatus.INTERNAL_SERVER_ERROR);
         }
                 return res;
     }
