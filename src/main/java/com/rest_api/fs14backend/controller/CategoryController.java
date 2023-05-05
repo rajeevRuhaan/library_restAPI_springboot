@@ -39,5 +39,9 @@ public class CategoryController {
         categoryService.deleteOne(categoryId);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/find/{categoryId}")
+    public Category findById(@PathVariable UUID categoryId) {
+       return categoryService.findCategoryById(categoryId);
+    }
 
 }
