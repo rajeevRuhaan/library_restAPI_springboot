@@ -1,9 +1,14 @@
 package com.rest_api.fs14backend.serviceImpl;
 
+import com.rest_api.fs14backend.dao.AuthRequest;
 import com.rest_api.fs14backend.entity.User;
 import com.rest_api.fs14backend.repository.UserRepository;
 import com.rest_api.fs14backend.service.UserService;
+import com.rest_api.fs14backend.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,20 +18,37 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public List<User> signup(){
-        User user = new User("mughees", "admin");
-        userRepository.save(user);
-        return (List<User>) user;
+    public String login(AuthRequest authRequest){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authRequest.getUsername(),
+                        authRequest.getPassword()
+                )
+        );
+        User user = userRepository.findByUsername(authRequest.getUsername());
+        return jwtUtils.generateToken(user);
+
     }
 
     @Override
-    public String signin(){
-        return "user signed in";
+    public User signup(User user) {
+        User newUser = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()));
+        userRepository.save(newUser);
+        return newUser;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.rest_api.fs14backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 public class User {
@@ -16,19 +17,14 @@ public class User {
     @GeneratedValue
     @UuidGenerator
     private UUID id;
-    @Column(nullable = false,columnDefinition = "varchar(50)")
-    private String firstname;
 
-    @Column(nullable = false,columnDefinition = "varchar(50)")
-    private String lastname;
-
-    @Column(unique = true,nullable = false,columnDefinition = "varchar(50)")
+    @Column(unique = true)
     private String username;
 
-    @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    public User(String username, String password) {
+    public User(String username, String password){
         this.username = username;
         this.password = password;
     }

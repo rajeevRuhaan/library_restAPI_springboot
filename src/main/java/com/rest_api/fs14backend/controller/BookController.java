@@ -1,5 +1,10 @@
 package com.rest_api.fs14backend.controller;
 
+import com.rest_api.fs14backend.dao.BookDao;
+import com.rest_api.fs14backend.entity.Author;
+import com.rest_api.fs14backend.entity.Category;
+import com.rest_api.fs14backend.service.AuthorService;
+import com.rest_api.fs14backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -21,8 +26,8 @@ public class BookController {
     }
 
     @PostMapping()
-    public Book createOne(@RequestBody Book book) {
-        return bookService.createOne(book);
+    public Book createOne(@RequestBody BookDao bookDao) {
+        return bookService.createOne(bookDao);
     }
 
     @GetMapping("/{id}/")
@@ -30,8 +35,8 @@ public class BookController {
         return bookService.findOne(id);
     }
    @PutMapping("/updateBook/{id}/")
-    public Book updateOne(@PathVariable UUID id,@RequestBody Book book){
-        return bookService.updateOne(id,book);
+    public Book updateOne(@PathVariable UUID id,@RequestBody BookDao bookDao){
+        return bookService.updateOne(id,bookDao);
     }
 
     @DeleteMapping("/deleteBook/{id}/")

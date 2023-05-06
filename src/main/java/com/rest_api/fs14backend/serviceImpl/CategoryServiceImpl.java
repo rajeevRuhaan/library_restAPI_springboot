@@ -5,9 +5,9 @@ import com.rest_api.fs14backend.repository.CategoryRepository;
 import com.rest_api.fs14backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -40,5 +40,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteOne(UUID categoryId)  {
         categoryRepository.deleteById(categoryId);
+    }
+    public Category findCategoryById(UUID categoryId)  {
+        return categoryRepository.findById(categoryId).get();
     }
 }
