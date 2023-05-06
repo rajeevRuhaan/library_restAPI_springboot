@@ -34,12 +34,12 @@ public class BookController {
     public Book getOne(@PathVariable UUID id){
         return bookService.findOne(id);
     }
-   @PutMapping("/updateBook/{id}/")
+   @PutMapping("/{id}/")
     public Book updateOne(@PathVariable UUID id,@RequestBody BookDao bookDao){
         return bookService.updateOne(id,bookDao);
     }
 
-    @DeleteMapping("/deleteBook/{id}/")
+    @DeleteMapping("/{id}/")
     public void deleteOne(@PathVariable UUID id){
             bookService.deleteOne(id);
     }
