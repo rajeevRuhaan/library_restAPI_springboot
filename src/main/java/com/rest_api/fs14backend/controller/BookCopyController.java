@@ -28,7 +28,7 @@ public class BookCopyController {
     public BookCopy createOne(@RequestBody BookCopyDto bookCopyDto){
         return bookCopyService.createOne(bookCopyDto);
     }
-    @DeleteMapping("/deleteBookCopy/{id}/")
+    @DeleteMapping("/{id}/")
     public void deleteOne(@PathVariable UUID id){
          bookCopyService.deleteOne(id);
     }
