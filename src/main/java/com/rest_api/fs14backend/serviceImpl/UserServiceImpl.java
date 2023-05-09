@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,6 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findById(UUID userId) {
+
+        return userRepository.findById(userId);
+    }
+
+    @Override
     public String login(AuthRequest authRequest){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -46,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signup(User user) {
-        User newUser = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()));
+        User newUser = new User(user.getUsername(), user.getRole(),  passwordEncoder.encode(user.getPassword()));
         userRepository.save(newUser);
         return newUser;
     }

@@ -22,15 +22,18 @@ public class BookCopyController {
     BookService bookService;
     @GetMapping()
     public List<BookCopy> findAll(){
+
         return bookCopyService.getAll();
     }
     @PostMapping()
     public BookCopy createOne(@RequestBody BookCopyDto bookCopyDto){
+
         return bookCopyService.createOne(bookCopyDto);
     }
     @DeleteMapping("/{id}/")
     public void deleteOne(@PathVariable UUID id){
-         bookCopyService.deleteOne(id);
+
+        bookCopyService.deleteOne(id);
     }
 
 }

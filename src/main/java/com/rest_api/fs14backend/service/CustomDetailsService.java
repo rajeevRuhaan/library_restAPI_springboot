@@ -1,4 +1,4 @@
-package com.rest_api.fs14backend.SecurityConfig;
+package com.rest_api.fs14backend.service;
 
 import com.rest_api.fs14backend.entity.User;
 import com.rest_api.fs14backend.repository.UserRepository;

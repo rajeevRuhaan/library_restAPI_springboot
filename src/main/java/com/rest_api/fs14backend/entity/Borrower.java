@@ -2,50 +2,31 @@ package com.rest_api.fs14backend.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity
-@Table (name = "borrowers")
+@Table (name = "borrower")
 @NoArgsConstructor
-
+@Data
 public class Borrower {
     @Id
     @GeneratedValue()
     private UUID id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private User user;
+    @OneToOne(optional = false)
+    private BookCopy bookCopy;
 
-    @Column
-    private String name;
 
-    private long bookId;
-
-    public Borrower( String name,Long bookId ) {
-        this.name = name;
-        this.bookId = bookId;
+    public Borrower(User user, BookCopy bookCopy) {
+        this.user = user;
+        this.bookCopy = bookCopy;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public Borrower(Optional<User> user, BookCopy bookCopy) {
     }
 }

@@ -30,16 +30,16 @@ public class BookController {
         return bookService.createOne(bookDao);
     }
 
-    @GetMapping("/{id}/")
+    @GetMapping("{id}")
     public Book getOne(@PathVariable UUID id){
         return bookService.findOne(id);
     }
-   @PutMapping("/{id}/")
+   @PutMapping("{id}")
     public Book updateOne(@PathVariable UUID id,@RequestBody BookDao bookDao){
         return bookService.updateOne(id,bookDao);
     }
 
-    @DeleteMapping("/{id}/")
+    @DeleteMapping("{id}")
     public void deleteOne(@PathVariable UUID id){
             bookService.deleteOne(id);
     }

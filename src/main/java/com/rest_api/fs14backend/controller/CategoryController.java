@@ -19,27 +19,28 @@ public class CategoryController {
     @Autowired
     private CategoryServiceImpl categoryService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Category> findAll(){
         return categoryService.findAll();
     }
 
-    @PostMapping("/update")
-    public Category updateOne(@RequestBody Category updatedCategory) {
+    @PutMapping("{categoryId}")
+    public Category updateOne(@PathVariable UUID categoryId, @RequestBody Category updatedCategory) {
+        updatedCategory.setId(categoryId);
         return categoryService.updateOne(updatedCategory);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Category addOne(@RequestBody Category newCategory) {
         return categoryService.addOne(newCategory);
     }
 
-    @DeleteMapping("/delete/{categoryId}")
+    @DeleteMapping("{categoryId}")
     public ResponseEntity<?> deleteCategory(@PathVariable UUID categoryId) {
         categoryService.deleteOne(categoryId);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/find/{categoryId}")
+    @GetMapping("{categoryId}")
     public Category findById(@PathVariable UUID categoryId) {
        return categoryService.findCategoryById(categoryId);
     }

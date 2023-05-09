@@ -1,8 +1,8 @@
 package com.rest_api.fs14backend.filters;
 
-import com.rest_api.fs14backend.SecurityConfig.CustomDetailsService;
+
+import com.rest_api.fs14backend.service.CustomDetailsService;
 import com.rest_api.fs14backend.utils.JwtUtils;
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;

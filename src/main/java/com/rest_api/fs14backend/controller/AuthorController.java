@@ -17,7 +17,6 @@ public class AuthorController {
     private AuthorService authorService;
     @PostMapping
     public ResponseEntity<String> createAuthor(@RequestBody Author author) {
-        System.out.println(author);
         ResponseEntity<String> res = null;
         try{
             UUID id = authorService.createAuthor(author);
@@ -41,9 +40,12 @@ public class AuthorController {
     }
     @PutMapping("{id}")
     // http://localhost:8080/api/author/63afcc65-aee6-40be-8331-7e890800d267
-    public ResponseEntity<Author> updateAuthor(@PathVariable("id") UUID authorId, @RequestBody Author author){
-        author.setId(authorId);
-        Author updateAuthor = authorService.updateAuthor(author);
+    public ResponseEntity<Author> updateAuthor(@PathVariable UUID authorId, @RequestBody Author author){
+        //author.setId(authorId);
+        Author updateAuthor = authorService.updateAuthor(author, authorId);
+        if (updateAuthor == null) {
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(updateAuthor, HttpStatus.OK);
     }
 

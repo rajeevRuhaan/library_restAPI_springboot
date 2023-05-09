@@ -36,7 +36,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findOne (UUID id){
-        System.out.println("##### " + bookRepository.findById(id));
         return bookRepository.findById(id).orElse(null);
     }
     @Override
@@ -54,11 +53,11 @@ public class BookServiceImpl implements BookService {
        Book foundBook =  bookRepository.findById(id).orElse(null);
         UUID authorId = bookDao.getAuthorID();
         Author foundAuthor = authorService.getUserById(authorId);
-        System.out.println("### author " +  foundAuthor);
         UUID categoryId = bookDao.getCategoryId();
         Category foundCategory = categoryService.findCategoryById(categoryId);
 
-       if(foundBook != null){ foundBook.setIsbn(bookDao.getIsbn());
+       if(foundBook != null){
+           foundBook.setIsbn(bookDao.getIsbn());
            foundBook.setTitle(bookDao.getTitle());
            foundBook.setAuthor(foundAuthor);
            foundBook.setCategory(foundCategory);

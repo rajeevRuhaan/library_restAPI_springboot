@@ -9,6 +9,6 @@ public interface AuthorService {
     UUID createAuthor(Author author);
     Author getUserById(UUID authorId);
     List<Author> getAllAuthors();
-    Author updateAuthor(Author author);
+    Author updateAuthor(Author author, UUID authorId);
     void deleteAuthor(UUID authorId);
 }

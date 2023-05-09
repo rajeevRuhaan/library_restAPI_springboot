@@ -8,6 +8,7 @@ import com.rest_api.fs14backend.entity.BookCopy;
 @Component
 public class BookCopyMapper {
     public BookCopy toBookCopy(Book book){
+
         return new BookCopy(book);
     }
 }
