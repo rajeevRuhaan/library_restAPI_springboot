@@ -15,6 +15,7 @@ public interface BorrowerService {
 
 public Borrower createOne(BorrowDao borrowDao);
 public List<Borrower> getAllBorrower();
-public List<Borrower> findByUserId( UUID userId);
+public List<Borrower> findAllByUserId( UUID userId);
 
+    void deleteOne(UUID borrowerId);
 }

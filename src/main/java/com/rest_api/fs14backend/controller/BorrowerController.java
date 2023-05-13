@@ -1,5 +1,6 @@
 package com.rest_api.fs14backend.controller;
 
+import com.auth0.net.Response;
 import com.rest_api.fs14backend.dao.BorrowDao;
 import com.rest_api.fs14backend.entity.Borrower;
 import com.rest_api.fs14backend.repository.BorrowerRepository;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -21,8 +23,8 @@ public class BorrowerController {
 
     @PostMapping
     public ResponseEntity<String> createOne(@RequestBody BorrowDao borrowDao) {
-         System.out.println(borrowDao);
-         ResponseEntity<String> res = null;
+
+         ResponseEntity<String> res ;
          try{
             Borrower borrower =  borrowerService.createOne(borrowDao);
              res = new ResponseEntity<String>("borrower created: " + borrower, HttpStatus.CREATED);
@@ -35,7 +37,20 @@ public class BorrowerController {
     @GetMapping
     public List<Borrower> getAllBorrower() {
         List<Borrower> borrowerList = borrowerService.getAllBorrower();
+        System.out.println(borrowerList);
         return borrowerList ;
+    }
+    @GetMapping("{id}")
+    public List<Borrower> getAllByUserId(@PathVariable("id") UUID userId) {
+        System.out.println(userId);
+        List<Borrower> borrowerList = borrowerService.findAllByUserId(userId);
+        System.out.println(borrowerList);
+        return borrowerList ;
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteBorrower(@PathVariable("id") UUID borrowerId) {
+        borrowerService.deleteOne(borrowerId);
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
     }
 
 }

@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 @Service
@@ -33,7 +36,11 @@ public class BorrowerServiceImpl implements BorrowerService {
             User user = userService.findById(userId).get();
             UUID bookCopyId = borrowDao.getBookCopyId();
             BookCopy bookCopy = bookCopyService.findOne(bookCopyId);
-            Borrower borrower = borrowMapper.toBorrower(user, bookCopy);
+            // current date as borrow date
+            Date borrowDate = new Date();
+            // add 30 days return time
+            Date returnDate =  new Date(borrowDate.getTime() + ((1000 * 60 * 60 * 24)* 30));
+            Borrower borrower = borrowMapper.toBorrower(user, bookCopy, borrowDate, returnDate);
             return borrowerRepository.save(borrower);
 
     }
@@ -44,7 +51,14 @@ public class BorrowerServiceImpl implements BorrowerService {
     }
 
     @Override
-    public List<Borrower> findByUserId(UUID userId) {
-        return null;
+    public List<Borrower> findAllByUserId(UUID userId) {
+        return borrowerRepository.findAllByUserId(userId);
     }
+
+    @Override
+    public void deleteOne(UUID borrowerId) {
+    borrowerRepository.deleteById(borrowerId);
+    }
+
+
 }
