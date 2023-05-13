@@ -20,6 +20,7 @@ public class BookCopy {
     private UUID id;
     @ManyToOne(optional = false)
     private Book book;
+    private Boolean isAvailable= true;
 
     public  BookCopy(Book book){
         this.book = book;

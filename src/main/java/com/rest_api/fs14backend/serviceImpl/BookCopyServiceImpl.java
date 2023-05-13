@@ -38,6 +38,7 @@ public class BookCopyServiceImpl implements BookCopyService {
     public BookCopy createOne(BookCopyDto bookCopyDto){
         UUID bookId = bookCopyDto.getBookId();
         Book book = bookService.findOne(bookId);
+
         BookCopy bookCopy = bookCopyMapper.toBookCopy(book);
         return bookCopyRepository.save(bookCopy);
     }

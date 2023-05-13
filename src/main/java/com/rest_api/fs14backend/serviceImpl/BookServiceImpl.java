@@ -63,7 +63,7 @@ public class BookServiceImpl implements BookService {
            foundBook.setCategory(foundCategory);
            foundBook.setPublishedDate(bookDao.getPublishedDate());
            foundBook.setPublisher(bookDao.getPublisher());
-           foundBook.setCover(bookDao.getCover());
+           foundBook.setCoverImageUrl(bookDao.getCoverImageUrl());
            return bookRepository.save(foundBook);
        }
       return null;

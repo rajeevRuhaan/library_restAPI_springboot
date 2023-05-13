@@ -22,7 +22,7 @@ public class Borrower {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="id_user", referencedColumnName = "id")
+    @JoinColumn(name="userId", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private User user;
 

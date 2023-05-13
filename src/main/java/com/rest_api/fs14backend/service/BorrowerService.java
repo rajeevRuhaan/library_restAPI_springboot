@@ -13,9 +13,8 @@ import java.util.UUID;
 
 public interface BorrowerService {
 
-public Borrower createOne(BorrowDao borrowDao);
-public List<Borrower> getAllBorrower();
-public List<Borrower> findAllByUserId( UUID userId);
-
-    void deleteOne(UUID borrowerId);
+     void createOne(BorrowDao borrowDao);
+     List<Borrower> getAllBorrower();
+     List<Borrower> findAllByUserId( UUID userId);
+     void deleteOne(UUID borrowerId);
 }

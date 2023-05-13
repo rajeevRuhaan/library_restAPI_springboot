@@ -16,5 +16,5 @@ public class BookDao {
         private String isbn;
         private Date publishedDate;
         private String publisher;
-        private String cover;
+        private String coverImageUrl;
 }

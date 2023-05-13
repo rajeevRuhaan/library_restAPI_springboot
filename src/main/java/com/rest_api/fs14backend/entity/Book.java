@@ -30,7 +30,7 @@ public class Book {
     @Column(nullable = false)
     private String publisher;
     @Column(nullable = false)
-    private String cover;
+    private String coverImageUrl;
 
     public Book(String title, String isbn, Author author, Category category, Date publishedDate, String publisher, String cover) {
         this.title = title;
@@ -39,6 +39,6 @@ public class Book {
         this.category = category;
         this.publishedDate = publishedDate;
         this.publisher = publisher;
-        this.cover = cover;
+        this.coverImageUrl = coverImageUrl;
     }
 }

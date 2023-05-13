@@ -21,6 +21,8 @@ public class Author {
     private String email;
     @Column(nullable = true, columnDefinition = "varchar(50)")
     private String phone;
+    @Column(nullable = true, columnDefinition = "varchar(250)")
+    private String authorImageURL;
 
 
 }
