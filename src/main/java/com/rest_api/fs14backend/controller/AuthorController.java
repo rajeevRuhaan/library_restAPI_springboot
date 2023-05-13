@@ -17,14 +17,14 @@ public class AuthorController {
     private AuthorService authorService;
     @PostMapping
     public ResponseEntity<String> createAuthor(@RequestBody Author author) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<String> res ;
         try{
             UUID id = authorService.createAuthor(author);
             res = new ResponseEntity<String>("new Author created: " + author.getAuthorName() , HttpStatus.CREATED);
         } catch (Exception e) {
             res = new ResponseEntity<String>( "Unable to save", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-                return res;
+        return res;
     }
 
     @GetMapping
