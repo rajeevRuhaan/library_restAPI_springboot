@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.service;
 
-import com.rest_api.fs14backend.dao.AuthRequest;
+import com.rest_api.fs14backend.dto.AuthRequest;
 import com.rest_api.fs14backend.entity.User;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.serviceImpl;
 
-import com.rest_api.fs14backend.dao.AuthRequest;
+import com.rest_api.fs14backend.dto.AuthRequest;
 import com.rest_api.fs14backend.entity.User;
 import com.rest_api.fs14backend.repository.UserRepository;
 import com.rest_api.fs14backend.service.UserService;
@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findById(UUID userId) {
-
         return userRepository.findById(userId);
     }
 

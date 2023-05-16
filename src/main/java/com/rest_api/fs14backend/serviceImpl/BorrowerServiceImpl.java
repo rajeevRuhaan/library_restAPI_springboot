@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.serviceImpl;
 
-import com.rest_api.fs14backend.dao.BorrowDao;
+import com.rest_api.fs14backend.dto.BorrowDto;
 import com.rest_api.fs14backend.entity.BookCopy;
 import com.rest_api.fs14backend.entity.Borrower;
 import com.rest_api.fs14backend.entity.User;
@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +32,11 @@ public class BorrowerServiceImpl implements BorrowerService {
     BorrowMapper borrowMapper;
 
     @Override
-    public void createOne(BorrowDao borrowDao) {
+    public void createOne(BorrowDto borrowDto) {
 
-        UUID userId = borrowDao.getUserId();
+        UUID userId = borrowDto.getUserId();
         User user = userService.findById(userId).get();
-        UUID bookCopyId = borrowDao.getBookCopyId();
+        UUID bookCopyId = borrowDto.getBookCopyId();
         BookCopy bookCopy = bookCopyService.findOne(bookCopyId);
         // current date as borrow date
         Date borrowDate = new Date();

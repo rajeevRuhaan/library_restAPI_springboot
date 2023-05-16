@@ -10,7 +10,7 @@ import java.util.UUID;
 import com.rest_api.fs14backend.entity.BookCopy;
 import com.rest_api.fs14backend.repository.BookCopyRepository;
 import com.rest_api.fs14backend.service.BookCopyService;
-import com.rest_api.fs14backend.dao.BookCopyDto;
+import com.rest_api.fs14backend.dto.BookCopyDto;
 import com.rest_api.fs14backend.entity.Book;
 import com.rest_api.fs14backend.mapper.BookCopyMapper;
 

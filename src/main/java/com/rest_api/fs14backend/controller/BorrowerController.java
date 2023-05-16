@@ -1,10 +1,7 @@
 package com.rest_api.fs14backend.controller;
 
-import com.auth0.net.Response;
-import com.rest_api.fs14backend.dao.BorrowDao;
+import com.rest_api.fs14backend.dto.BorrowDto;
 import com.rest_api.fs14backend.entity.Borrower;
-import com.rest_api.fs14backend.repository.BookCopyRepository;
-import com.rest_api.fs14backend.repository.BorrowerRepository;
 import com.rest_api.fs14backend.service.BorrowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +20,9 @@ public class BorrowerController {
     BorrowerService borrowerService;
 
     @PostMapping
-    public ResponseEntity<String> createOne(@RequestBody BorrowDao borrowDao) {
+    public ResponseEntity<String> createOne(@RequestBody BorrowDto borrowDto) {
         try {
-            borrowerService.createOne(borrowDao);
+            borrowerService.createOne(borrowDto);
             return new ResponseEntity<>("borrower created: ", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Unable to borrow", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.mapper;
 
-import com.rest_api.fs14backend.dao.BookDao;
+import com.rest_api.fs14backend.dto.BookDto;
 import com.rest_api.fs14backend.entity.Author;
 import com.rest_api.fs14backend.entity.Book;
 import com.rest_api.fs14backend.entity.Category;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper {
-    public Book toBook(BookDao bookDao, Category category, Author author){
-        return new Book(bookDao.getTitle(),bookDao.getIsbn(),author,category,bookDao.getPublishedDate(),bookDao.getPublisher(),bookDao.getCoverImageUrl());
+    public Book toBook(BookDto bookDto, Category category, Author author){
+        return new Book(bookDto.getTitle(), bookDto.getIsbn(),author,category, bookDto.getPublishedDate(), bookDto.getPublisher(), bookDto.getCoverImageUrl(), bookDto.getDescription());
     }
 }

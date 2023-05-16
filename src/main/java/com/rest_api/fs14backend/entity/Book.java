@@ -31,8 +31,12 @@ public class Book {
     private String publisher;
     @Column(nullable = false)
     private String coverImageUrl;
+    @Column(nullable = true)
+    @Lob
+    private String description;
 
-    public Book(String title, String isbn, Author author, Category category, Date publishedDate, String publisher, String cover) {
+
+    public Book(String title, String isbn, Author author, Category category, Date publishedDate, String publisher, String coverImageUrl, String description) {
         this.title = title;
         this.isbn = isbn;
         this.author = author;
@@ -40,5 +44,6 @@ public class Book {
         this.publishedDate = publishedDate;
         this.publisher = publisher;
         this.coverImageUrl = coverImageUrl;
+        this.description = description;
     }
 }
