@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
     }
     @Override
     public Book createOne(BookDto bookDto) {
-        UUID authorId = bookDto.getAuthorID();
+        UUID authorId = bookDto.getAuthorId();
         Author foundAuthor = authorService.getUserById(authorId);
         UUID categoryId = bookDto.getCategoryId();
         Category foundCategory = categoryService.findCategoryById(categoryId);
@@ -51,7 +51,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book updateOne(UUID id, BookDto bookDto){
        Book foundBook =  bookRepository.findById(id).orElse(null);
-        UUID authorId = bookDto.getAuthorID();
+        UUID authorId = bookDto.getAuthorId();
         Author foundAuthor = authorService.getUserById(authorId);
         UUID categoryId = bookDto.getCategoryId();
         Category foundCategory = categoryService.findCategoryById(categoryId);

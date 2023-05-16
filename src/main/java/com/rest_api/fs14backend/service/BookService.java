@@ -9,9 +9,9 @@ import com.rest_api.fs14backend.entity.Book;
 
 @Service
 public interface BookService {
-    public List<Book> findAll();
-    public Book findOne(UUID id);
-    public Book createOne(BookDto bookDto);
-    public Book updateOne(UUID id, BookDto bookDto);
-    public void deleteOne(UUID id);
+     List<Book> findAll();
+     Book findOne(UUID id);
+     Book createOne(BookDto bookDto);
+     Book updateOne(UUID id, BookDto bookDto);
+     void deleteOne(UUID id);
 }

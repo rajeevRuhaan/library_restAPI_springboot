@@ -10,8 +10,8 @@ import com.rest_api.fs14backend.entity.BookCopy;
 
 @Service
 public interface BookCopyService {
-    public List<BookCopy> getAll();
-    public BookCopy findOne(UUID id);
-    public BookCopy createOne(BookCopyDto bookCopyDto);
-    public void deleteOne(UUID id);
+     List<BookCopy> getAll();
+     BookCopy findOne(UUID id);
+     BookCopy createOne(BookCopyDto bookCopyDto);
+     void deleteOne(UUID id);
 }

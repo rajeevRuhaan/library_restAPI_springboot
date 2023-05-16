@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 public class BookDto {
         private UUID categoryId;
-        private UUID authorID;
+        private UUID authorId;
         private String title;
         private String isbn;
         private Date publishedDate;
