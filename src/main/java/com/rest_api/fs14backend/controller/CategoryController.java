@@ -6,6 +6,8 @@ import com.rest_api.fs14backend.repository.CategoryRepository;
 import com.rest_api.fs14backend.repository.UserRepository;
 import com.rest_api.fs14backend.serviceImpl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,9 +38,13 @@ public class CategoryController {
     }
 
     @DeleteMapping("{categoryId}")
-    public ResponseEntity<?> deleteCategory(@PathVariable UUID categoryId) {
+    public ResponseEntity<?> deleteCategory(@PathVariable UUID categoryId) throws Exception {
+        try {
         categoryService.deleteOne(categoryId);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+        return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
     }
     @GetMapping("{categoryId}")
     public Category findById(@PathVariable UUID categoryId) {

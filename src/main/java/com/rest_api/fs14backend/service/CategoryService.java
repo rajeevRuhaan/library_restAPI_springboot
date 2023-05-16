@@ -6,12 +6,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CategoryService {
-    public List<Category> findAll();
+     List<Category> findAll();
 
-    public Category updateOne(Category updatedCategory);
+     Category updateOne(Category updatedCategory);
 
-    public Category addOne(Category newCategory);
+     Category addOne(Category newCategory);
 
-    public void deleteOne( UUID categoryId);
-    public Category findCategoryById(UUID categoryId);
+     void deleteOne( UUID categoryId) throws Exception;
+     Category findCategoryById(UUID categoryId);
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.UuidGenerator;
 import java.util.Date;
 import java.util.UUID;
@@ -21,9 +22,13 @@ public class Book {
     private String title;
     @Column(nullable = false,columnDefinition = "varchar(50)")
     private String isbn;
-    @OneToOne
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "authorId", nullable = false)
+    @ToString.Exclude
     private Author author;
-    @OneToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoryId", nullable = false)
+    @ToString.Exclude
     private Category category;
     @Column(nullable = false)
     private Date publishedDate;
