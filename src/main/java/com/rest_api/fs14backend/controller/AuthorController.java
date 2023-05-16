@@ -20,11 +20,10 @@ public class AuthorController {
         ResponseEntity<String> res ;
         try{
             UUID id = authorService.createAuthor(author);
-            res = new ResponseEntity<String>("new Author created: " + author.getAuthorName() , HttpStatus.CREATED);
+            return new ResponseEntity<String>("new Author created: " + author.getAuthorName() , HttpStatus.CREATED);
         } catch (Exception e) {
-            res = new ResponseEntity<String>( "Unable to save", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>( "Unable to save", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return res;
     }
 
     @GetMapping
@@ -51,8 +50,13 @@ public class AuthorController {
 
     @DeleteMapping("{id}")
     public  ResponseEntity<String>  deleteAuthor(@PathVariable("id") UUID authorId) {
-        authorService.deleteAuthor(authorId);
-        return new ResponseEntity<>("Author successfully deleted!", HttpStatus.OK);
+
+        try {
+            authorService.deleteAuthor(authorId);
+            return new ResponseEntity<>("Author successfully deleted!", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

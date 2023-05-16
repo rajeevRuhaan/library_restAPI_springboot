@@ -33,6 +33,7 @@ public class SecurityConfig {
     ) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -46,6 +47,7 @@ public class SecurityConfig {
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -54,12 +56,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("api/v1/users/signup", "api/v1/users/signin").permitAll()
+                .requestMatchers(request -> request.getMethod().equals("GET")
+                        && (request.getServletPath().equals("/api/v1/books")
+                        || request.getServletPath().equals("/api/v1/author")
+                        || request.getServletPath().equals("/api/v1/category"))).permitAll()
+                .requestMatchers(request -> request.getMethod().equals("POST")
+                        && (request.getServletPath().equals("/api/v1/books")
+                        || request.getServletPath().equals("/api/v1/author")
+                        || request.getServletPath().equals("/api/v1/category")
+                        || request.getServletPath().equals("api/v1/bookCopies"))).hasRole("ADMIN")
+                .requestMatchers(
+                        "api/v1/users/signup",
+                        "api/v1/users/signin"
+                ).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

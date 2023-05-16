@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.serviceImpl;
 
-import com.rest_api.fs14backend.dto.AuthRequest;
+import com.rest_api.fs14backend.dto.AuthRequestDto;
 import com.rest_api.fs14backend.entity.User;
 import com.rest_api.fs14backend.repository.UserRepository;
 import com.rest_api.fs14backend.service.UserService;
@@ -39,14 +39,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(AuthRequest authRequest){
+    public String login(AuthRequestDto authRequestDto){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authRequest.getUsername(),
-                        authRequest.getPassword()
+                        authRequestDto.getUsername(),
+                        authRequestDto.getPassword()
                 )
         );
-        User user = userRepository.findByUsername(authRequest.getUsername());
+        User user = userRepository.findByUsername(authRequestDto.getUsername());
         return jwtUtils.generateToken(user);
 
     }

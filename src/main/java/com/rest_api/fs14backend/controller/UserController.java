@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.controller;
 
-import com.rest_api.fs14backend.dto.AuthRequest;
+import com.rest_api.fs14backend.dto.AuthRequestDto;
 import com.rest_api.fs14backend.entity.User;
 import com.rest_api.fs14backend.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public String login(@RequestBody AuthRequest authRequest){
-        return userService.login(authRequest);
+    public String login(@RequestBody AuthRequestDto authRequestDto){
+        return userService.login(authRequestDto);
     }
 
     @PostMapping("/signup")
