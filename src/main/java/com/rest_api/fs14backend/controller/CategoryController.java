@@ -1,28 +1,24 @@
 package com.rest_api.fs14backend.controller;
 
 import com.rest_api.fs14backend.entity.Category;
-import com.rest_api.fs14backend.entity.User;
-import com.rest_api.fs14backend.repository.CategoryRepository;
-import com.rest_api.fs14backend.repository.UserRepository;
-import com.rest_api.fs14backend.serviceImpl.CategoryServiceImpl;
+import com.rest_api.fs14backend.exceptions.NotFoundException;
+import com.rest_api.fs14backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/category")
 public class CategoryController {
     @Autowired
-    private CategoryServiceImpl categoryService;
+    CategoryService categoryService;
 
     @GetMapping
-    public List<Category> findAll(){
+    public List<Category> findAll() {
         return categoryService.findAll();
     }
 
@@ -38,17 +34,23 @@ public class CategoryController {
     }
 
     @DeleteMapping("{categoryId}")
-    public ResponseEntity<?> deleteCategory(@PathVariable UUID categoryId) throws Exception {
+    public ResponseEntity<?> deleteCategory(@PathVariable UUID categoryId) {
         try {
-        categoryService.deleteOne(categoryId);
-        return new ResponseEntity<>(HttpStatus.OK);
+            categoryService.deleteOne(categoryId);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-        return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+            String errorMessage = "Error deleting category: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("{categoryId}")
     public Category findById(@PathVariable UUID categoryId) {
-       return categoryService.findCategoryById(categoryId);
+        Category foundCategory = categoryService.findCategoryById(categoryId);
+        if (foundCategory == null) {
+            throw new NotFoundException("Category not found");
+        }
+        return foundCategory;
     }
 
 }

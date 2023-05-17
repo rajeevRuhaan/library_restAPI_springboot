@@ -18,7 +18,7 @@ import com.rest_api.fs14backend.service.BookService;
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
     @GetMapping()
     public ResponseEntity<List<Book>> findAll() {
@@ -31,12 +31,12 @@ public class BookController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> createOne(@RequestBody BookDto bookDto) {
+    public ResponseEntity<?> createBook(@RequestBody BookDto bookDto) {
         try {
-            bookService.createOne(bookDto);
-            return new ResponseEntity<>("New book created", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            Book createdBook = bookService.createOne(bookDto);
+            return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }

@@ -23,6 +23,12 @@ public class Author {
     private String phone;
     @Column(nullable = true, columnDefinition = "varchar(250)")
     private String authorImageURL;
+ public Author(String authorName, String email, String phone, String authorImageURL) {
+     this.authorName = authorName;
+     this.email = email;
+     this.phone = phone;
+     this.authorImageURL = authorImageURL;
 
+ }
 
 }

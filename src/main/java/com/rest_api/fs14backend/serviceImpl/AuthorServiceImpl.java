@@ -14,6 +14,7 @@ import java.util.UUID;
 public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
+
     @Override
     public UUID createAuthor(Author author) {
         UUID id = authorRepository.save(author).getId();
@@ -21,7 +22,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author getUserById(UUID authorId) {
+    public Author getAuthorById(UUID authorId) {
         Optional<Author> optionalAuthor = authorRepository.findById(authorId);
         return optionalAuthor.get();
     }
@@ -35,7 +36,7 @@ public class AuthorServiceImpl implements AuthorService {
     public Author updateAuthor(Author author, UUID authorId) {
         Author existingAuthor = authorRepository.findById(authorId).orElse(null);
 
-        if(existingAuthor != null) {
+        if (existingAuthor != null) {
             existingAuthor.setEmail(author.getEmail());
             existingAuthor.setAuthorName(author.getAuthorName());
             existingAuthor.setPhone(author.getPhone());
@@ -47,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(UUID authorId) {
-    authorRepository.deleteById(authorId);
+        authorRepository.deleteById(authorId);
 
     }
 }

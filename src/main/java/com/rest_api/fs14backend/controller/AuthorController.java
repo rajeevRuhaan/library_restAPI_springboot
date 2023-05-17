@@ -34,7 +34,7 @@ public class AuthorController {
     @GetMapping("{id}")
     // http://localhost:8080/api/author/63afcc65-aee6-40be-8331-7e890800d267
     public ResponseEntity<Author> getAuthorById(@PathVariable("id") UUID authorId) {
-        Author author = authorService.getUserById(authorId);
+        Author author = authorService.getAuthorById(authorId);
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
     @PutMapping("{id}")

@@ -17,7 +17,7 @@ import java.util.UUID;
 public class BorrowerController {
 
     @Autowired
-    BorrowerService borrowerService;
+    private BorrowerService borrowerService;
 
     @PostMapping
     public ResponseEntity<String> createOne(@RequestBody BorrowDto borrowDto) {
