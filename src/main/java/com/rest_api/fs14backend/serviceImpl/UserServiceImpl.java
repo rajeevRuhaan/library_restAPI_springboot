@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(AuthRequestDto authRequestDto){
+    public String login(AuthRequestDto authRequestDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequestDto.getUsername(),
@@ -52,10 +52,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User signup(User user) {
-        User newUser = new User(user.getUsername(), user.getRole(),  passwordEncoder.encode(user.getPassword()));
+    public void signup(User user) {
+        User newUser = new User(
+                user.getUsername(),
+                user.getRole(),
+                passwordEncoder.encode(user.getPassword()));
         userRepository.save(newUser);
-        return newUser;
     }
 
 }

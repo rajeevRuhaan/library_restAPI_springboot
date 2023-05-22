@@ -10,6 +10,6 @@ import java.util.UUID;
 public interface UserService {
      List<User> findAll();
      Optional<User> findById(UUID userId);
-     User signup(User user);
+     void signup(User user);
      String login(AuthRequestDto authRequestDto);
 }
