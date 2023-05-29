@@ -29,8 +29,15 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category addOne(@RequestBody Category newCategory) {
-        return categoryService.addOne(newCategory);
+    public ResponseEntity<String> createCategory(@RequestBody Category newCategory) {
+        try {
+            categoryService.createCategory(newCategory);
+            return new ResponseEntity<>("New Category created", HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Unable to save category", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("{categoryId}")

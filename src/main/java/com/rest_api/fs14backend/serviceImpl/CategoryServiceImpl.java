@@ -34,8 +34,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category addOne(Category category) {
-        return categoryRepository.save(category);
+    public void createCategory(Category category) {
+        String name = category.getName();
+        if(categoryRepository.existsByName(name)) {
+            throw new IllegalArgumentException(name + " Already exists");
+        }
+        categoryRepository.save(category);
     }
 
     @Override

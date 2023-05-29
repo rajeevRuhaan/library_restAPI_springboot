@@ -15,16 +15,16 @@ public class Author {
     @GeneratedValue
     @UuidGenerator
     private UUID id;
-    @Column(nullable = false, columnDefinition = "varchar(50)")
-    private String authorName;
-    @Column(nullable = false, columnDefinition = "varchar(50)")
+    @Column(unique = true, nullable = false, columnDefinition = "varchar(50)")
+    private String name;
+    @Column(unique = true, nullable = false, columnDefinition = "varchar(50)")
     private String email;
     @Column(nullable = true, columnDefinition = "varchar(50)")
     private String phone;
     @Column(nullable = true, columnDefinition = "varchar(250)")
     private String authorImageURL;
  public Author(String authorName, String email, String phone, String authorImageURL) {
-     this.authorName = authorName;
+     this.name = authorName;
      this.email = email;
      this.phone = phone;
      this.authorImageURL = authorImageURL;

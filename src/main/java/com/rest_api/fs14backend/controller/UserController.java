@@ -7,6 +7,9 @@ import com.rest_api.fs14backend.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public String login(@RequestBody AuthRequestDto authRequestDto){
-        return userService.login(authRequestDto);
+    public ResponseEntity<String> login(@RequestBody AuthRequestDto authRequestDto){
+        try {
+            String token = userService.login(authRequestDto);
+            return ResponseEntity.ok(token);
+        } catch (AuthenticationException ex) {
+            // Handle other authentication errors
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication failed");
+        }
     }
 
     @PostMapping("/signup")

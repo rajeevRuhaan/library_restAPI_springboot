@@ -40,15 +40,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(AuthRequestDto authRequestDto) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authRequestDto.getUsername(),
-                        authRequestDto.getPassword()
-                )
-        );
-        User user = userRepository.findByUsername(authRequestDto.getUsername());
-        return jwtUtils.generateToken(user);
 
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authRequestDto.getUsername(),
+                            authRequestDto.getPassword()
+                    )
+            );
+            User user = userRepository.findByUsername(authRequestDto.getUsername());
+            return jwtUtils.generateToken(user);
     }
 
     @Override

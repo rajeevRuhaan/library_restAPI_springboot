@@ -10,7 +10,7 @@ public interface CategoryService {
 
      Category updateOne(Category updatedCategory);
 
-     Category addOne(Category newCategory);
+     void createCategory(Category newCategory);
 
      void deleteOne( UUID categoryId) throws Exception;
      Category findCategoryById(UUID categoryId);

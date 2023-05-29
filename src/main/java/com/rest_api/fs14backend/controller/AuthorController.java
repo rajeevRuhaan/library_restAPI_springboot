@@ -15,14 +15,16 @@ import java.util.UUID;
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
+
     @PostMapping
     public ResponseEntity<String> createAuthor(@RequestBody Author author) {
-        ResponseEntity<String> res ;
-        try{
-            UUID id = authorService.createAuthor(author);
-            return new ResponseEntity<String>("new Author created: " + author.getAuthorName() , HttpStatus.CREATED);
+        try {
+            authorService.createAuthor(author);
+            return new ResponseEntity<String>("new Author created: " + author.getName(), HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Invalid request: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<String>( "Unable to save", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>("Unable to save", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -31,25 +33,27 @@ public class AuthorController {
         List<Author> author = authorService.getAllAuthors();
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
+
     @GetMapping("{id}")
     // http://localhost:8080/api/author/63afcc65-aee6-40be-8331-7e890800d267
     public ResponseEntity<Author> getAuthorById(@PathVariable("id") UUID authorId) {
         Author author = authorService.getAuthorById(authorId);
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     // http://localhost:8080/api/author/63afcc65-aee6-40be-8331-7e890800d267
-    public ResponseEntity<Author> updateAuthor(@PathVariable UUID authorId, @RequestBody Author author){
+    public ResponseEntity<Author> updateAuthor(@PathVariable UUID authorId, @RequestBody Author author) {
         //author.setId(authorId);
         Author updateAuthor = authorService.updateAuthor(author, authorId);
         if (updateAuthor == null) {
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(updateAuthor, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public  ResponseEntity<String>  deleteAuthor(@PathVariable("id") UUID authorId) {
+    public ResponseEntity<String> deleteAuthor(@PathVariable("id") UUID authorId) {
 
         try {
             authorService.deleteAuthor(authorId);

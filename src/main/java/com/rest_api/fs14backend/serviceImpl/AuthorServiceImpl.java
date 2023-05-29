@@ -16,9 +16,18 @@ public class AuthorServiceImpl implements AuthorService {
     private AuthorRepository authorRepository;
 
     @Override
-    public UUID createAuthor(Author author) {
-        UUID id = authorRepository.save(author).getId();
-        return id;
+    public void createAuthor(Author author) {
+        System.out.println(author);
+        String email = author.getEmail();
+        String name = author.getName();
+        if (authorRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+        if (authorRepository.existsByName(name)) {
+            throw new IllegalArgumentException("Name already exists");
+        }
+        authorRepository.save(author);
+
     }
 
     @Override
@@ -38,7 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
 
         if (existingAuthor != null) {
             existingAuthor.setEmail(author.getEmail());
-            existingAuthor.setAuthorName(author.getAuthorName());
+            existingAuthor.setName(author.getName());
             existingAuthor.setPhone(author.getPhone());
             authorRepository.save(existingAuthor);
             return existingAuthor;
