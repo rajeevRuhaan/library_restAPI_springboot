@@ -29,10 +29,10 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createCategory(@RequestBody Category newCategory) {
+    public ResponseEntity<String> createCategory(@RequestBody Category category) {
         try {
-            categoryService.createCategory(newCategory);
-            return new ResponseEntity<>("New Category created", HttpStatus.CREATED);
+            categoryService.createCategory(category);
+            return new ResponseEntity<>("New Category created:" + category.getName(), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {

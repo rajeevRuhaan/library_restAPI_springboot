@@ -43,22 +43,19 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book createOne(BookDto bookDto) {
-        System.out.println(bookDto);
         UUID authorId = bookDto.getAuthorId();
-        Optional<Author> foundAuthor = Optional.ofNullable(authorService.getAuthorById(authorId));
-        if (foundAuthor.isPresent()) {
-            System.out.println("author");
+        Author foundAuthor = authorService.getAuthorById(authorId);
+        if (foundAuthor == null) {
             throw new IllegalArgumentException("Author not found");
         }
 
         UUID categoryId = bookDto.getCategoryId();
         Category foundCategory = categoryService.findCategoryById(categoryId);
         if (foundCategory == null) {
-            System.out.println("category");
             throw new IllegalArgumentException("Category not found");
         }
 
-        Book newBook = bookMapper.toBook(bookDto, foundCategory, foundAuthor.get());
+        Book newBook = bookMapper.toBook(bookDto, foundCategory, foundAuthor);
         return bookRepository.save(newBook);
     }
 

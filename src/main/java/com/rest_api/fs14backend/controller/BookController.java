@@ -34,7 +34,7 @@ public class BookController {
     public ResponseEntity<?> createBook(@RequestBody BookDto bookDto) {
         try {
             Book createdBook = bookService.createOne(bookDto);
-            return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
+            return new ResponseEntity<>("Book created successfully", HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
