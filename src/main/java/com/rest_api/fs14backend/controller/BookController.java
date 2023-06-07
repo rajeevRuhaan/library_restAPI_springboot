@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.rest_api.fs14backend.entity.Book;
@@ -34,7 +36,11 @@ public class BookController {
     public ResponseEntity<?> createBook(@RequestBody BookDto bookDto) {
         try {
             Book createdBook = bookService.createOne(bookDto);
-            return new ResponseEntity<>("Book created successfully", HttpStatus.CREATED);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Book created successfully");
+            response.put("id", createdBook.getId());
+            return new ResponseEntity<>(response,  HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

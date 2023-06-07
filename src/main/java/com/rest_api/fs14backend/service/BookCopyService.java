@@ -14,4 +14,5 @@ public interface BookCopyService {
      BookCopy findOne(UUID id);
      BookCopy createOne(BookCopyDto bookCopyDto);
      void deleteOne(UUID id);
+     List<BookCopy>  findByBookId(UUID id);
 }

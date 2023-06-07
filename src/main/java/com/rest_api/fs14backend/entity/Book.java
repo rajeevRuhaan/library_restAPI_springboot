@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -37,6 +40,10 @@ public class Book {
     @Column(nullable = true)
     @Lob
     private String description;
+//    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+//    private List<BookCopy> copies = new ArrayList<>();
+
 
 
     public Book(String title, String isbn, Author author, Category category, Date publishedDate, String publisher, String coverImageUrl, String description) {
@@ -49,4 +56,14 @@ public class Book {
         this.coverImageUrl = coverImageUrl;
         this.description = description;
     }
+
+//    public void addCopy(BookCopy copy) {
+//        copies.add(copy);
+//        copy.setBook(this);
+//    }
+//
+//    public void removeCopy(BookCopy copy) {
+//        copies.remove(copy);
+//        copy.setBook(null);
+//    }
 }

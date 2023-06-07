@@ -1,6 +1,9 @@
 package com.rest_api.fs14backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -20,15 +23,23 @@ public class BookCopyController {
     BookService bookService;
     @GetMapping()
     public List<BookCopy> findAll(){
-
         return bookCopyService.getAll();
     }
-    @PostMapping()
-    public BookCopy createOne(@RequestBody BookCopyDto bookCopyDto){
-
-        return bookCopyService.createOne(bookCopyDto);
+    @GetMapping("/{id}")
+    public List<BookCopy> findById(@PathVariable UUID id) {
+        return bookCopyService.findByBookId(id);
     }
-    @DeleteMapping("/{id}/")
+    @PostMapping()
+    public ResponseEntity<?> createOne(@RequestBody BookCopyDto bookCopyDto){
+        try {
+            bookCopyService.createOne(bookCopyDto);
+            return new ResponseEntity<>("Book copy created", HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+    @DeleteMapping("{id}")
     public void deleteOne(@PathVariable UUID id){
 
         bookCopyService.deleteOne(id);

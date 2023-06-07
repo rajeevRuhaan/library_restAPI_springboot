@@ -1,9 +1,6 @@
 package com.rest_api.fs14backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
@@ -19,6 +16,7 @@ public class BookCopy {
     @UuidGenerator
     private UUID id;
     @ManyToOne(optional = false)
+    @JoinColumn(name = "book_id")
     private Book book;
     private Boolean isAvailable= true;
 

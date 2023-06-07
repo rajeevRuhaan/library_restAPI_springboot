@@ -5,6 +5,7 @@ import com.rest_api.fs14backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +40,9 @@ public class BookCopyServiceImpl implements BookCopyService {
     public BookCopy createOne(BookCopyDto bookCopyDto) {
         UUID bookId = bookCopyDto.getBookId();
         Book book = bookService.findOne(bookId);
-
+        if (book == null) {
+            throw new IllegalArgumentException("Book not found");
+        }
         BookCopy bookCopy = bookCopyMapper.toBookCopy(book);
         return bookCopyRepository.save(bookCopy);
     }
@@ -47,6 +50,19 @@ public class BookCopyServiceImpl implements BookCopyService {
     @Override
     public void deleteOne(UUID id) {
         bookCopyRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BookCopy> findByBookId(UUID id) {
+        List<BookCopy>  filterBookCopies = new ArrayList<>();
+
+        List<BookCopy>  allBookCopies = bookCopyRepository.findAll();
+       for (BookCopy bookCopy: allBookCopies) {
+           if(bookCopy.getBook().getId().equals(id)) {
+               filterBookCopies.add(bookCopy);
+           }
+       }
+        return filterBookCopies;
     }
 
 }
