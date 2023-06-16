@@ -2,13 +2,12 @@ package com.rest_api.fs14backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,32 +18,38 @@ public class Book {
     @GeneratedValue
     @UuidGenerator
     private UUID id;
+
     @Column(nullable = false,columnDefinition = "varchar(50)")
     private String title;
+
     @Column(nullable = false,columnDefinition = "varchar(50)")
     private String isbn;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "author_Id", nullable = false, referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private Author author;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_Id", nullable = false, referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private Category category;
+
     @Column(nullable = false)
     private Date publishedDate;
+
     @Column(nullable = false)
     private String publisher;
+
     @Column(nullable = false)
     private String coverImageUrl;
+
     @Column(nullable = true)
     @Lob
     private String description;
-//    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-//    private List<BookCopy> copies = new ArrayList<>();
 
-
+//    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List copies = new ArrayList<>();
 
     public Book(String title, String isbn, Author author, Category category, Date publishedDate, String publisher, String coverImageUrl, String description) {
         this.title = title;
@@ -57,13 +62,5 @@ public class Book {
         this.description = description;
     }
 
-//    public void addCopy(BookCopy copy) {
-//        copies.add(copy);
-//        copy.setBook(this);
-//    }
-//
-//    public void removeCopy(BookCopy copy) {
-//        copies.remove(copy);
-//        copy.setBook(null);
-//    }
+
 }

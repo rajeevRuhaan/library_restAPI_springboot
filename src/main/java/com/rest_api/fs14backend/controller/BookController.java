@@ -1,6 +1,7 @@
 package com.rest_api.fs14backend.controller;
 
 import com.rest_api.fs14backend.dto.BookDto;
+import com.rest_api.fs14backend.entity.BookCopy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -45,6 +46,11 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
+    }
+    @PostMapping("/addCopy")
+    public ResponseEntity<?> addCopy(@RequestBody BookCopy copy) {
+
+        return null;
     }
 
     @GetMapping("{id}")
